@@ -1,3 +1,4 @@
 *.BAK
 a.out
 *.o
+tests/test
