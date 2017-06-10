@@ -5,7 +5,6 @@
 
 int tests_run = 0;
 
-
 static char *
 all_tests() {
   mu_run_test(test_convert_fahrenheit_to_celsius);
@@ -14,6 +13,9 @@ all_tests() {
 
 int
 main(int argc, char **argv) {
+  (void)argc;
+  (void)argv;
+
   char *result = all_tests();
   if (result != 0) {
     printf("%s\n", result);

@@ -29,11 +29,11 @@ test_convert_fahrenheit_to_celsius(void) {
   static char message[FORMATTED_MESSAGE_SIZE_MAX];
 #undef FORMATTED_MESSAGE_SIZE_MAX
 
-  const char *message_format = "expected conversion of %f fahrenheit to equal %f celsius but got %f";
-  for (int i = 0; i < sizeof(test_cases) / sizeof(struct test_case); i++) {
+  const char *message_format = "(%s:%s:%d:%d) expected conversion of %f fahrenheit to equal %f celsius but got %f";
+  for (unsigned long i = 0ul; i < sizeof(test_cases) / sizeof(struct test_case); i++) {
     struct test_case test = test_cases[i];
     double actual = convert_fahrenheit_to_celsius(test.fahrenheit);
-    (void)sprintf(message, message_format, test.fahrenheit, test.expected, actual);
+    (void)sprintf(message, message_format, __FILE__, __func__, __LINE__, i, test.fahrenheit, test.expected, actual);
     mu_assert(message,
       fabs(actual - test.expected) < epsilon);
   }
