@@ -18,6 +18,10 @@ test_convert_fahrenheit_to_celsius(void) {
     TEST_CASE(32, 0)
     TEST_CASE(33, 5.0 / 9.0)
     TEST_CASE(41, 5.0)
+    TEST_CASE(23, -5.0)
+    TEST_CASE(50, 10.0)
+    TEST_CASE(59, 15.0)
+    TEST_CASE(95, 35.0)
   };
 #undef TEST_CASE
 
