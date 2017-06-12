@@ -11,7 +11,11 @@ generate_table(
   double celsius;
   while(fahrenheit <= maximum) {
     celsius = conv(fahrenheit);
-    output(fahrenheit, celsius);
+    struct temperature_pair pair = {
+      .fahrenheit = fahrenheit,
+      .celsius = celsius
+    };
+    output(pair);
     fahrenheit += step;
   }
 }

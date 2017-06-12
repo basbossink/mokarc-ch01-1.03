@@ -11,9 +11,8 @@ converter_stub(double input) {
 }
 
 void
-call_counter(double fahrenheit, double celsius) {
-  (void)fahrenheit;
-  (void)celsius;
+call_counter(struct temperature_pair pair) {
+  (void)pair;
   output_call_count++;
 }
 
