@@ -5,18 +5,23 @@ SOURCES:=$(wildcard $(SRC_DIR)/*.c)
 TEST_SOURCES:=$(wildcard *.c)
 OBJECTS:=$(SOURCES:.c=.o)
 TEST_OBJECTS:=$(TEST_SOURCES:.c=.o)
+OBJS:=$(OBJECTS)
+OBJS+=$(TEST_OBJECTS)
+DEPS:=$(OBJS:.o=.d)
 EXECUTABLE:=test
 
-all: $(SOURCES) $(TEST_SOURCES) $(EXECUTABLE)
+all: $(EXECUTABLE)
 	@./$(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS) $(TEST_OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) $(TEST_OBJECTS) -o $@
+$(EXECUTABLE): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
+-include $(DEPS)
+
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP -MF $*.d -c $< -o $@
 
 .PHONY: clean
 
 clean:
-	rm -f *.BAK $(OBJECTS) $(TEST_OBJECTS) $(EXECUTABLE)
+	rm -f *.BAK $(OBJS) $(DEPS) $(EXECUTABLE)
