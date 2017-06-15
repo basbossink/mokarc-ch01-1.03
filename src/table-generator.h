@@ -4,7 +4,7 @@ struct temperature_pair {
 };
 
 typedef double (*converter)(double);
-typedef void (*sink)(struct temperature_pair);
+typedef int (*sink)(const char*);
 
 void
 generate_table(

@@ -10,10 +10,10 @@ converter_stub(double input) {
   return input;
 }
 
-void
-call_counter(struct temperature_pair pair) {
-  (void)pair;
-  output_call_count++;
+int
+call_counter(const char* line) {
+  (void)line;
+  return output_call_count++;
 }
 
 char *
@@ -27,7 +27,7 @@ test_table_generator(void) {
 #define FORMATTED_MESSAGE_SIZE_MAX 1024
   static char message[FORMATTED_MESSAGE_SIZE_MAX];
 #undef FORMATTED_MESSAGE_SIZE_MAX
-  const int expected = 11;
+  const int expected = 12;
   const char *message_format = "(%s:%s:%d) expected conversion of table genarator with start %f maximum %f step %f to call output function %d times but it was called %d times.";
   (void)sprintf
     (message,
