@@ -1,5 +1,4 @@
+build/
 *.BAK
-a.out
 *.o
 *.d
-tests/test
