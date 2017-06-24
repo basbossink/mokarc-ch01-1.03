@@ -1,13 +1,17 @@
+#include <stdio.h>
+
 #include "../vendor/minunit/minunit.h"
 #include "temp-converter-test.h"
 #include "table-generator-test.h"
+#include "command-line-parser-test.h"
 
-#include <stdio.h>
 
 int tests_run = 0;
 
 static char *
 all_tests() {
+  mu_run_test(test_command_line_parser);
+  mu_run_test(test_convert_celsius_to_fahrenheit);
   mu_run_test(test_convert_fahrenheit_to_celsius);
   mu_run_test(test_table_generator);
   return 0;

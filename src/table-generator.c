@@ -5,18 +5,13 @@
 static char row[LINE_LENGTH];
 #undef LINE_LENGTH
 
-static const char* row_format = "| %14.0f | %11.1f |";
-static const char* table_header =
-  "| Temperature conversion table |\n"\
-  "+------------------------------+\n"\
-  "|   Fahrenheit   |   Celsius   |\n"\
-  "+----------------+-------------+";
-
 void
 generate_table(
   double start,
   double maximum,
   double step,
+  const char* table_header,
+  const char* row_format,
   converter conv,
   sink output){
   double fahrenheit = start;
@@ -24,7 +19,7 @@ generate_table(
   output(table_header);
   while(fahrenheit <= maximum) {
     celsius = conv(fahrenheit);
-    sprintf(row, row_format, fahrenheit, celsius);
+    snprintf(row, sizeof row, row_format, fahrenheit, celsius);
     output(row);
     fahrenheit += step;
   }
