@@ -1,4 +1,3 @@
-CC=cc
 CFLAGS+=-Wall -Wextra -Werror -pedantic --std=c11
 SRC_DIR:=src
 TEST_DIR:=tests
