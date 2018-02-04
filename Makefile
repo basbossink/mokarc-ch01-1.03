@@ -1,4 +1,4 @@
-CFLAGS+=-Wall -Wextra -Werror -pedantic --std=c11
+CFLAGS+=-Wall -Wextra -Werror -pedantic -std=c11
 SRC_DIR:=src
 TEST_DIR:=tests
 OUTPUT_DIR:=build
@@ -11,10 +11,12 @@ DEPS:=$(ALL_OBJECTS:.o=.d)
 TEST_EXECUTABLE:=$(OUTPUT_DIR)/test
 EXECUTABLE:=$(OUTPUT_DIR)/temp_table
 
-all: $(TEST_EXECUTABLE) $(EXECUTABLE)
+all: compile
 	@./$(TEST_EXECUTABLE)
 	@./$(EXECUTABLE)
 	@./$(EXECUTABLE) --celsius
+
+compile: $(TEST_EXECUTABLE) $(EXECUTABLE)
 
 $(TEST_EXECUTABLE): $(OBJECTS) $(TEST_OBJECTS) | $(OUTPUT_DIR)
 	$(CC) $(LDFLAGS) -o $@ $^
@@ -27,10 +29,13 @@ $(EXECUTABLE): $(OBJECTS) main/main.o | $(OUTPUT_DIR)
 $(OUTPUT_DIR):
 	mkdir -p $(OUTPUT_DIR)
 
+lint: clean
+	scan-build --use-cc=/usr/local/bin/clang-5.0 -o /tmp gmake compile
+
 %.o: %.c
 	$(CC) $(CFLAGS) -MMD -MP -MF $*.d -c $< -o $@
 
-.PHONY: clean all
+.PHONY: clean all lint compile
 
 clean:
 	rm -rf $(OUTPUT_DIR) $(ALL_OBJECTS) $(DEPS)
