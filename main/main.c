@@ -6,7 +6,7 @@
 #include "../src/command-line-parser.h"
 
 static const char* fahrenheit_row_format = "| %14.0f | %11.1f |";
-static const char* fahrenheit_table_header =
+static const char* fahrenheit_table_header = "\n"\
   "| Temperature conversion table |\n"\
   "+------------------------------+\n"\
   "|   Fahrenheit   |   Celsius   |\n"\
@@ -14,7 +14,7 @@ static const char* fahrenheit_table_header =
 
 
 static const char* celsius_row_format = "| %11.0f | %14.1f |";
-static const char* celsius_table_header =
+static const char* celsius_table_header = "\n"\
   "| Temperature conversion table |\n"\
   "+------------------------------+\n"\
   "|   Celsius   |  Fahrenheit    |\n"\
