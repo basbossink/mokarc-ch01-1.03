@@ -9,6 +9,7 @@
 
 int tests_run = 0;
 
+
 static char *
 all_tests() {
   mu_run_test(test_command_line_parser);
@@ -17,6 +18,7 @@ all_tests() {
   mu_run_test(test_table_generator);
   return 0;
 }
+
 
 int
 main(int argc, char **argv) {

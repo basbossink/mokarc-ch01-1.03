@@ -1,5 +1,4 @@
 #include <math.h>
-#include <stdio.h>
 #include "../vendor/minunit/minunit.h"
 #include "../src/table-generator.h"
 

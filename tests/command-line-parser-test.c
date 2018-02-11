@@ -1,5 +1,4 @@
 #include <stddef.h>
-#include <stdio.h>
 
 #include "../vendor/minunit/minunit.h"
 #include "../src/command-line-parser.h"
