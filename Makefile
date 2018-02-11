@@ -12,9 +12,9 @@ TEST_EXECUTABLE:=$(OUTPUT_DIR)/test
 EXECUTABLE:=$(OUTPUT_DIR)/temp_table
 
 all: compile
-	@./$(TEST_EXECUTABLE)
-	@./$(EXECUTABLE)
-	@./$(EXECUTABLE) --celsius
+	./$(TEST_EXECUTABLE)
+	./$(EXECUTABLE)
+	./$(EXECUTABLE) --celsius
 
 compile: $(TEST_EXECUTABLE) $(EXECUTABLE)
 
