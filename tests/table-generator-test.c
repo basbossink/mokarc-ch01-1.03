@@ -11,7 +11,7 @@ converter_stub(double input) {
 }
 
 int
-call_counter(const char* line) {
+call_counter(char const * line) {
   (void)line;
   return output_call_count++;
 }
@@ -24,15 +24,9 @@ test_table_generator(void) {
 
   generate_table(start, maximum, step, "", "", converter_stub, call_counter);
 
-#define FORMATTED_MESSAGE_SIZE_MAX 1024
-  static char message[FORMATTED_MESSAGE_SIZE_MAX];
-#undef FORMATTED_MESSAGE_SIZE_MAX
-  
   const int expected = 12;
-  const char *message_format = "(%s:%s) expected conversion of table genarator with start %f maximum %f step %f to call output function %d times but it was called %d times.";
-  (void)snprintf(
-    message,
-    sizeof message,
+  char const *message_format = "(%s:%s) expected conversion of table genarator with start %f maximum %f step %f to call output function %d times but it was called %d times.";
+  mu_assert(output_call_count == expected,
     message_format,
     __FILE__,
     __func__,
@@ -41,7 +35,5 @@ test_table_generator(void) {
     step,
     expected,
     output_call_count);
-  mu_assert(message,
-    output_call_count == expected);
   return 0;
 }

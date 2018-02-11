@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "../vendor/minunit/minunit.h"
 #include "temp-converter-test.h"
@@ -25,6 +26,7 @@ main(int argc, char **argv) {
   char *result = all_tests();
   if (result != 0) {
     printf("%s\n", result);
+    free(result);
   } else {
     printf("ALL TESTS PASSED\n");
   }

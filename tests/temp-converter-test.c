@@ -5,21 +5,14 @@
 
 const double epsilon = 1e-3;
 
-struct convert_fahrenheit_to_celsius_test_case {
+typedef struct temperature_pair {
   double fahrenheit;
-  double expected;
-};
+  double celsius;
+} temperature_pair;
 
 
-#define FORMATTED_MESSAGE_SIZE_MAX 128
-  static char message[FORMATTED_MESSAGE_SIZE_MAX];
-#undef FORMATTED_MESSAGE_SIZE_MAX
-
-char *
-test_convert_fahrenheit_to_celsius(void) {
-
-#define TEST_CASE(f, c) { .fahrenheit = (f), .expected = (c) },
-  struct convert_fahrenheit_to_celsius_test_case test_cases[] = {
+#define TEST_CASE(f, c) { .fahrenheit = (f), .celsius = (c) },
+static temperature_pair test_cases[] = {
     TEST_CASE(32, 0)
     TEST_CASE(33, 5.0 / 9.0)
     TEST_CASE(41, 5.0)
@@ -30,70 +23,45 @@ test_convert_fahrenheit_to_celsius(void) {
   };
 #undef TEST_CASE
 
-  const char *message_format = "(%s:%s::%d) expected conversion of %f fahrenheit to equal %f celsius but got %f";
-  const size_t number_of_test_cases = sizeof(test_cases) / sizeof(struct convert_fahrenheit_to_celsius_test_case);
+
+char *
+test_convert_fahrenheit_to_celsius(void) {
+  char const *message_format = "(%s:%s::%d) expected conversion of %f fahrenheit to equal %f celsius but got %f";
+  const size_t number_of_test_cases = sizeof(test_cases) / sizeof(temperature_pair);
   for (unsigned long i = 0ul;
        i < number_of_test_cases;
        i++) {
-    struct convert_fahrenheit_to_celsius_test_case test = test_cases[i];
+    temperature_pair test = test_cases[i];
     double actual = convert_fahrenheit_to_celsius(test.fahrenheit);
-    (void)snprintf(
-      message,
-      sizeof message,
-      message_format,
-      __FILE__,
-      __func__,
-      i,
-      test.fahrenheit,
-      test.expected,
-      actual);
-    mu_assert(message,
-      fabs(actual - test.expected) < epsilon);
+    mu_assert(fabs(actual - test.celsius) < epsilon,
+              message_format,
+              __FILE__,
+              __func__,
+              i,
+              test.fahrenheit,
+              test.celsius,
+              actual);
   }
   return 0;
 }
 
-
-struct convert_celsius_to_fahrenheit_test_case {
-  double celsius;
-  double expected;
-};
-
-
 char *
 test_convert_celsius_to_fahrenheit(void) {
-
-#define TEST_CASE(c, f) { .celsius = (c), .expected = (f) },
-  struct convert_celsius_to_fahrenheit_test_case test_cases[] = {
-    TEST_CASE(0, 32.0)
-    TEST_CASE(5.0/9.0, 33.0)
-    TEST_CASE(5, 41.0)
-    TEST_CASE(-5.0, 23)
-    TEST_CASE(10, 50.0)
-    TEST_CASE(15, 59.0)
-    TEST_CASE(35, 95.0)
-  };
-#undef TEST_CASE
-
-  const char *message_format = "(%s:%s::%d) expected conversion of %f celsius to equal %f fahrenheit but got %f";
-  const size_t number_of_test_cases = sizeof(test_cases) / sizeof(struct convert_celsius_to_fahrenheit_test_case);
+  char const* message_format = "(%s:%s::%d) expected conversion of %f celsius to equal %f fahrenheit but got %f";
+  const size_t number_of_test_cases = sizeof(test_cases) / sizeof(temperature_pair);
   for (unsigned long i = 0ul;
        i < number_of_test_cases;
        i++) {
-    struct convert_celsius_to_fahrenheit_test_case test = test_cases[i];
+    temperature_pair test = test_cases[i];
     double actual = convert_celsius_to_fahrenheit(test.celsius);
-    (void)snprintf(
-      message,
-      sizeof message,
+    mu_assert(fabs(actual - test.fahrenheit) < epsilon,
       message_format,
       __FILE__,
       __func__,
       i,
       test.celsius,
-      test.expected,
+      test.fahrenheit,
       actual);
-    mu_assert(message,
-      fabs(actual - test.expected) < epsilon);
   }
   return 0;
 }
