@@ -2,23 +2,23 @@
 #include <getopt.h>
 
 typedef struct option_flags {
-  bool show_celsius_table;
-  bool show_fahrenheit_table;
+    bool show_celsius_table;
+    bool show_fahrenheit_table;
 } option_flags;
 
 
-typedef void (*error_callback)(char const *message);
+typedef void (*error_callback)(
+    char *message);
 
 typedef int (*getopt_long_fn)(
-  int argc,
-  char * const *argv,
-  char const *optstring,
-  const struct option *longopts,
-  int *longindex);
+    int argc,
+    char * const *argv,
+    char const *optstring,
+    const struct option *longopts,
+    int *longindex);
 
-option_flags
-parse_command_line(
-  int argc,
-  char* const *argv,
-  getopt_long_fn getopt_fn,
-  error_callback error_occurred);
+option_flags parse_command_line(
+    int argc,
+    char* const *argv,
+    getopt_long_fn getopt_fn,
+    error_callback error_occurred);

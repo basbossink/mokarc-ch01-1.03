@@ -1,2 +1,1 @@
-char *
-test_table_generator(void);
+char* test_table_generator(void);
