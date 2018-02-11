@@ -6,6 +6,7 @@ typedef struct option_flags {
     bool show_fahrenheit_table;
 } option_flags;
 
+typedef struct option option;
 
 typedef void (*error_callback)(
     char *message);
@@ -14,7 +15,7 @@ typedef int (*getopt_long_fn)(
     int argc,
     char * const *argv,
     char const *optstring,
-    const struct option *longopts,
+    const option *longopts,
     int *longindex);
 
 option_flags parse_command_line(

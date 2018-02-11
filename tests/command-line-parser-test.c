@@ -20,7 +20,7 @@ int getopt_long_single_arg_stub(
     int argc,
     char * const *argv,
     char const *optstring,
-    const struct option *longopts,
+    const option *longopts,
     int *longindex) {
     (void)argv;
     (void)optstring;

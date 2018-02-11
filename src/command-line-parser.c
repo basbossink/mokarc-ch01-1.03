@@ -4,12 +4,12 @@
 
 #include "command-line-parser.h"
 
-struct option_flags parse_command_line(
+option_flags parse_command_line(
     int argc,
     char* const *argv,
     getopt_long_fn getopt_fn,
     error_callback error_occurred) {
-    struct option_flags parsed = {
+    option_flags parsed = {
         .show_celsius_table = false,
         .show_fahrenheit_table = false
     };
